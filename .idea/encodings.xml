@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aconf-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aconf-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aconf-filter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aconf-persist" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aconf-restful" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/aconf-service" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

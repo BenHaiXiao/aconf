@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/aconf.iml" filepath="$PROJECT_DIR$/aconf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aconf-admin/aconf-admin.iml" filepath="$PROJECT_DIR$/aconf-admin/aconf-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aconf-common/aconf-common.iml" filepath="$PROJECT_DIR$/aconf-common/aconf-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aconf-filter/aconf-filter.iml" filepath="$PROJECT_DIR$/aconf-filter/aconf-filter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aconf-persist/aconf-persist.iml" filepath="$PROJECT_DIR$/aconf-persist/aconf-persist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aconf-restful/aconf-restful.iml" filepath="$PROJECT_DIR$/aconf-restful/aconf-restful.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aconf-service/aconf-service.iml" filepath="$PROJECT_DIR$/aconf-service/aconf-service.iml" />
+    </modules>
+  </component>
+</project>

@@ -27,7 +27,7 @@
 
         <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
         <!-- gem entity -->
-        <javaModelGenerator targetPackage="com.yy.ent.publess.persist.base.model"
+        <javaModelGenerator targetPackage="com.github.bh.aconf.persist.base.model"
                             targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -41,22 +41,22 @@
         <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
         <!-- gem  mapper -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.yy.ent.publess.persist.base.mapper"
+                             targetPackage="com.github.bh.aconf.persist.base.mapper"
                              targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table tableName="app" domainObjectName="AppMeta">-->
-        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
-        <!--</table>-->
+        <table tableName="app" domainObjectName="AppMeta">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
 
         <table tableName="bss" domainObjectName="BssMeta">
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 
-        <!--<table tableName="app_register" domainObjectName="AppRegisterMeta">-->
-        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
-        <!--</table>-->
+        <table tableName="app_register" domainObjectName="AppRegisterMeta">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
         <table tableName="bss_archived" domainObjectName="BssArchivedMeta">
             <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
         </table>
@@ -72,21 +72,21 @@
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 
-        <!--<table tableName="push" domainObjectName="PushMeta">-->
-        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
-        <!--</table>-->
+        <table tableName="push" domainObjectName="PushMeta">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
 
-        <!--<table tableName="conditions" domainObjectName="ConditionMeta">-->
-        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
-        <!--</table>-->
+        <table tableName="conditions" domainObjectName="ConditionMeta">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
 
-        <!--<table tableName="user_auth" domainObjectName="UserAuthMeta">-->
-        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
-        <!--</table>-->
+        <table tableName="user_auth" domainObjectName="UserAuthMeta">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
 
-        <!--<table tableName="operation_log" domainObjectName="OperationLog">-->
-        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
-        <!--</table>-->
+        <table tableName="operation_log" domainObjectName="OperationLog">
+        <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
 
         <table tableName="resource" domainObjectName="ResourceMeta">
             <generatedKey column="id" sqlStatement="JDBC"/>

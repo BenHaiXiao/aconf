@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="aconf-admin" />
+        <module name="aconf-common" />
+        <module name="aconf-filter" />
+        <module name="aconf-persist" />
+        <module name="aconf-restful" />
+        <module name="aconf-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="aconf" target="1.7" />
+      <module name="aconf-admin" target="1.7" />
+      <module name="aconf-common" target="1.7" />
+      <module name="aconf-filter" target="1.7" />
+      <module name="aconf-persist" target="1.7" />
+      <module name="aconf-restful" target="1.7" />
+      <module name="aconf-service" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
