@@ -179,21 +179,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.yy.atom</groupId>
-            <artifactId>atom-message</artifactId>
-            <version>0.5.2</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
             <version>4.4.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.yy.atom</groupId>
-            <artifactId>atom-article</artifactId>
-            <version>0.0.1</version>
         </dependency>
 
 		<dependency>

@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.yy.ent" level="debug"/>
+    <logger name="com.github.bh" level="debug"/>
 
     <root level="debug">
         <appender-ref ref="console"/>

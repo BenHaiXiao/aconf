@@ -1,28 +1,5 @@
 package com.github.bh.aconf.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.yy.atom.article.Article;
-import com.yy.atom.article.ArticleExporter;
-import com.yy.atom.article.paragraph.Text;
-import com.yy.atom.article.paragraph.UnorderedList;
-import com.github.bh.aconf.alarm.EventType;
 import com.github.bh.aconf.common.constants.FilterBelongType;
 import com.github.bh.aconf.common.constants.ValidStatus;
 import com.github.bh.aconf.common.constants.ValueType;
@@ -54,17 +31,24 @@ import com.github.bh.aconf.persist.base.mapper.BssMetaMapper;
 import com.github.bh.aconf.persist.base.mapper.ConfigHistoryMetaMapper;
 import com.github.bh.aconf.persist.base.mapper.ConfigMetaMapper;
 import com.github.bh.aconf.persist.base.mapper.FilterMetaMapper;
-import com.github.bh.aconf.persist.base.model.BssMeta;
-import com.github.bh.aconf.persist.base.model.ConditionMeta;
-import com.github.bh.aconf.persist.base.model.ConfigHistoryMeta;
-import com.github.bh.aconf.persist.base.model.ConfigHistoryMetaExample;
-import com.github.bh.aconf.persist.base.model.ConfigMeta;
-import com.github.bh.aconf.persist.base.model.ConfigMetaExample;
-import com.github.bh.aconf.persist.base.model.FilterMeta;
-import com.github.bh.aconf.persist.base.model.FilterMetaExample;
-import com.github.bh.aconf.persist.base.model.ResourceMeta;
+import com.github.bh.aconf.persist.base.model.*;
 import com.github.bh.aconf.utils.AuthUtils;
-import com.github.bh.aconf.utils.MsgUtils;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author xiaobenhai
@@ -216,9 +200,6 @@ public class ConfigService {
         
         ConfigMeta configMeta = ConfigMapper.INSTANCE.getConfigMeta(config);
         saveConfigMeta(bssId, configMeta, request);
-        //发消息通知
-        sendMessage(config, request, bssId, EventType.CREATED);
-
         List<ConditionCommandV2> conditions = config.getConditions();
         if (CollectionUtils.isEmpty(conditions)) {
             return response.state(BusinessStatus.SUCCESS);
@@ -238,60 +219,6 @@ public class ConfigService {
         return response.state(BusinessStatus.SUCCESS);
     }
 
-    /**
-     * 发送YY群通知消息
-     *
-     * @param config
-     * @param request
-     */
-    private void sendMessage(ConfigCommandV2 config, HttpServletRequest request, Long bssId, EventType type) {
-        try {
-            Article article = new Article();
-            Text title = new Text();
-            title.setContent(AuthUtils.getAdminUser(request).getRealName() + type.getMessage() + config.getKey());
-            title.setType(Text.Type.H1);
-            article.addParagraph(title);
-
-            UnorderedList fields = new UnorderedList();
-            long tryTimes = 0L;
-            while(fields.getData()==null){
-            	tryTimes++;
-            	if(tryTimes%10000==0){
-            		LOGGER.info("UnorderedList data null:"+tryTimes);
-            		if(tryTimes>10000*10000) break;
-            	}
-            }
-            fields.addItem("默认值:" + config.getValue());
-            fields.addItem("下发默认值:" + (config.getSendDefault() == 0 ? "不下发" : "下发"));
-            fields.addItem("描述:" + config.getDescription());
-            BssMeta bssMeta = bssMetaMapper.selectByPrimaryKey(bssId);
-            fields.addItem("所属业务:" + bssMeta.getName() + "(" + bssMeta.getCode() + ")");
-            article.addParagraph(fields);
-
-//            Table conditionTable = new Table();
-//            List<ConditionCommandV2> cond = config.getConditions();
-//            conditionTable.addHeader("name", "Branch");
-//            conditionTable.addHeader("value", "Value");
-//            List<Map<String, Object>> maps = BeanUtils.batchConvertBean(cond);
-//            List<Map<String, String>> results = Lists.newArrayList();
-//            for (Map<String, Object> map : maps) {
-//                Map<String, String> strMap = Maps.newHashMap();
-//                for (Map.Entry<String, Object> entry : map.entrySet()) {
-//                    strMap.put(entry.getKey(), entry.getValue().toString());
-//                }
-//                results.add(strMap);
-//            }
-//            conditionTable.addRecords(results);
-//            article.addParagraph(conditionTable);
-
-            ArticleExporter exporter = ArticleExporter.create();
-            String message = exporter.toTxt(article);
-            LOGGER.info("article export: {}", message);
-            MsgUtils.sendYYGroupMessage(message);
-        } catch (Exception e) {
-            LOGGER.error("sendMessage has an error", e);
-        }
-    }
 
     public ServerResponse updateConfigV2(long bssId, long configId, ConfigCommandV2 config, HttpServletRequest request) {
         ServerResponse response = new ServerResponse();
@@ -379,7 +306,6 @@ public class ConfigService {
                 filterService.mergeFilter(conditionMeta.getId(), FilterBelongType.CONDITION, filterMeta, request);
             }
         }
-        sendMessage(config, request, bssId, EventType.UPDATED);
         return response.state(BusinessStatus.SUCCESS);
     }
 
@@ -591,24 +517,6 @@ public class ConfigService {
         configHistoryMetaMapper.insert(MetaMapper.INSTANCE.getHistoryMeta(config));
         increaseBssVersion(config.getBssId(), currentVersion);
         ConfigVo configVo = ConfigMapper.INSTANCE.getConfigVo(config);
-        Article article = new Article();
-        Text title = new Text();
-        title.setContent(AuthUtils.getAdminUser(request).getRealName() + EventType.DELETED.getMessage() + config.getName());
-        title.setType(Text.Type.H1);
-        article.addParagraph(title);
-
-        UnorderedList list = new UnorderedList();
-        long tryTimes = 0L;
-        while(list.getData()==null){
-        	tryTimes++;
-        	if(tryTimes%10000==0){
-        		LOGGER.info("UnorderedList data null:"+tryTimes);
-        		if(tryTimes>10000*10000) break;
-        	}
-        }
-        BssMeta bssMeta = bssMetaMapper.selectByPrimaryKey(config.getBssId());
-        list.addItem("所属业务:" + bssMeta.getName() + "(" + bssMeta.getCode() + ")");
-
         return response.state(BusinessStatus.SUCCESS).data(configVo);
     }
 
