@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="aconfDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://${aconf.jdbc.host}:${aconf.jdbc.port}/${aconf.jdbc.dbname}?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true"/>
+        <property name="username" value="${aconf.jdbc.username}"/>
+        <property name="password" value="${aconf.jdbc.password}"/>
+        <property name="maxActive" value="100"/>
+        <property name="maxIdle" value="100"/>
+        <property name="maxWait" value="5000"/>
+        <property name="defaultAutoCommit" value="true"/>
+        <property name="validationQuery" value="select 1"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testWhileIdle" value="true"/>
+    </bean>
+
+    <bean id="aconfTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="aconfDataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="aconfTransactionManager"/>
+
+    <bean id="aconfSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="aconfDataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:mappers/base/*Mapper.xml"/>
+        <property name="typeAliasesPackage" value="com.github.bh.aconf.persist.base.model"/>
+    </bean>
+
+    <bean id="aconfMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.github.bh.aconf.persist.base.mapper,com.github.bh.aconf.persist"/>
+        <property name="sqlSessionFactoryBeanName" value="aconfSqlSessionFactory"/>
+    </bean>
+</beans>

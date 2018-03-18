@@ -1,0 +1,7 @@
+#gridToolBar .change-page-size, .common-gird .change-page-size {
+    width: 68px;
+    display: inline;
+    padding: 2px 4px;
+    line-height: 0;
+    height: auto;
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <context id="publess" targetRuntime="MyBatis3">
+
+        <plugin type="org.mybatis.generator.plugins.AddLimitOffsetPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- remove comments -->
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://172.27.137.12:3306/publess?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="javaer" password="javaer">
+        </jdbcConnection>
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- java type resolver -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- gem entity -->
+        <javaModelGenerator targetPackage="com.yy.ent.publess.persist.base.model"
+                            targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- gem sq1 map -->
+        <sqlMapGenerator targetPackage="."
+                         targetProject="./src/main/resources/mappers/base">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <!-- gem  mapper -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.yy.ent.publess.persist.base.mapper"
+                             targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--<table tableName="app" domainObjectName="AppMeta">-->
+        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+
+        <table tableName="bss" domainObjectName="BssMeta">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+
+        <!--<table tableName="app_register" domainObjectName="AppRegisterMeta">-->
+        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+        <table tableName="bss_archived" domainObjectName="BssArchivedMeta">
+            <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        </table>
+
+        <table tableName="config" domainObjectName="ConfigMeta">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+
+        <table tableName="config_history" domainObjectName="ConfigHistoryMeta">
+        </table>
+
+        <table tableName="filter" domainObjectName="FilterMeta">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+
+        <!--<table tableName="push" domainObjectName="PushMeta">-->
+        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="conditions" domainObjectName="ConditionMeta">-->
+        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="user_auth" domainObjectName="UserAuthMeta">-->
+        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="operation_log" domainObjectName="OperationLog">-->
+        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+
+        <table tableName="resource" domainObjectName="ResourceMeta">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+    </context>
+</generatorConfiguration>

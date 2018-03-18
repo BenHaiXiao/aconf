@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="true" monitoring="autodetect" dynamicConfig="true">
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <defaultCache maxElementsInMemory="10000" eternal="false"
+                  timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false"
+                  diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000" diskPersistent="false"
+                  diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"
+                  statistics="true"/>
+
+    <!-- 8h expired -->
+    <cache name="filters" maxElementsInMemory="200000" eternal="false" overflowToDisk="false"
+           timeToIdleSeconds="3600" timeToLiveSeconds="3600"
+           memoryStoreEvictionPolicy="LRU" statistics="true"/>
+
+    <!-- 1h expired -->
+    <cache name="configMetas" maxElementsInMemory="100000" eternal="false" overflowToDisk="false"
+           timeToIdleSeconds="3600" timeToLiveSeconds="3600"
+           memoryStoreEvictionPolicy="LRU" statistics="true"/>
+
+    <!-- 1h expired -->
+    <cache name="conditionMetas" maxElementsInMemory="100000" eternal="false" overflowToDisk="false"
+           timeToIdleSeconds="3600" timeToLiveSeconds="3600"
+           memoryStoreEvictionPolicy="LRU" statistics="true"/>
+
+    <!-- 4h expired -->
+    <cache name="bssMetas" maxElementsInMemory="1000" eternal="false" overflowToDisk="false"
+           timeToIdleSeconds="14400" timeToLiveSeconds="14400"
+           memoryStoreEvictionPolicy="LRU" statistics="true"/>
+
+    <!-- 1m expired -->
+    <cache name="emptyBssMetas" maxElementsInMemory="500" eternal="false" overflowToDisk="false"
+           timeToIdleSeconds="60" timeToLiveSeconds="60"
+           memoryStoreEvictionPolicy="LRU" statistics="true"/>
+
+    <cache name="emptyConfigMetas" maxElementsInMemory="50000" eternal="false" overflowToDisk="false"
+           timeToIdleSeconds="60" timeToLiveSeconds="60"
+           memoryStoreEvictionPolicy="LRU" statistics="true"/>
+
+</ehcache>

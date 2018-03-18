@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd"
+       default-lazy-init="false">
+
+    <!-- for config cache -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="schedulerName" value="configCacheScheduler"/>
+        <property name="triggers">
+            <list>
+                <ref bean="filterCacheUpdateTrigger"/>
+                <ref bean="bssConfigMetaCacheUpdateTrigger"/>
+                <ref bean="conditionMetaCacheUpdateTrigger"/>
+            </list>
+        </property>
+        <property name="taskExecutor">
+            <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+                <property name="corePoolSize" value="5"/>
+                <property name="maxPoolSize" value="10"/>
+                <property name="queueCapacity" value="100"/>
+            </bean>
+        </property>
+        <property name="waitForJobsToCompleteOnShutdown" value="true"/>
+    </bean>
+
+    <bean id="filterCacheUpdateTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="targetObject" ref="filterCacheUpdateJob"/>
+                <property name="targetMethod" value="execute"/>
+                <property name="concurrent" value="true"/>
+            </bean>
+        </property>
+        <property name="startDelay" value="100"/> <!-- delay 0.1s -->
+        <property name="repeatInterval" value="20000"/> <!-- repeat per 20s -->
+    </bean>
+
+    <bean id="bssConfigMetaCacheUpdateTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="targetObject" ref="bssConfigMetaCacheUpdateJob"/>
+                <property name="targetMethod" value="execute"/>
+                <property name="concurrent" value="true"/>
+            </bean>
+        </property>
+        <property name="startDelay" value="1000"/> <!-- delay 1s -->
+        <property name="repeatInterval" value="30000"/> <!-- repeat per 30s -->
+    </bean>
+
+    <bean id="conditionMetaCacheUpdateTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail">
+            <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="targetObject" ref="conditionCacheUpdateJob"/>
+                <property name="targetMethod" value="execute"/>
+                <property name="concurrent" value="true"/>
+            </bean>
+        </property>
+        <property name="startDelay" value="1000"/> <!-- delay 1s -->
+        <property name="repeatInterval" value="30000"/> <!-- repeat per 30s -->
+    </bean>
+</beans>

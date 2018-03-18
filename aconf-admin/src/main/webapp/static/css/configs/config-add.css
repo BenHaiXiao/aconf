@@ -1,0 +1,41 @@
+#add-dialog {
+    padding: 20px 15px;
+}
+
+#configAddDesc {
+    height: 220px;
+    resize: none;
+}
+
+.branchTitle {
+    cursor: move;
+}
+
+.branch-header {
+    margin-bottom: 10px;
+}
+
+.input-icon {
+    position: absolute;
+    top: 6px;
+    right: 24px;
+}
+
+.addFilterBtn {
+    padding: 0 2.14px;
+}
+
+.form-control.dialog-control {
+    margin-top: 0;
+}
+
+#batchEditorContainer {
+    height: 80%;
+    margin: 10px;
+}
+
+#batchEditor {
+    height: 100%;
+    width: 100%;
+    resize: none;
+}
