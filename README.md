@@ -27,7 +27,7 @@
 
 整个系统分为配置下发进程、管理后台和客户端SDK三部分。
 如下图所示，管理后台进行应用配置、业务配置和配置项配置的管理。配置下发进程负责处理下发逻辑，为符合下发条件的用户下发配置。客户端SDK封装协议，并在客户端本地缓存配置，方便客户端调用。
- ![](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a0.png)
+ ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a0.png)
 说明：
 1. 缓存采用ecache，配置比较少时，建议都配置为在内存中，管理后台更新配置，每个配置下发进程定时更新缓存，达到配置修改的而目的。
 2. 配置中心支持多个应用App，一个App对应多个业务部门bss，一个业务bss支持多个配置项config，
@@ -52,23 +52,23 @@
 
 原属性和比较属性之间使用ValueAdapter转换。转换器可以以模板的形式提供，用户可在后台配置。
 对应以上两种类型的条件，设计了两种条件拦截器：
- ![](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a1.png)
+ ![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a1.png)
 计数拦截器通过计数器控制条件计数，超过设置值则停止计数，且请求总是不通过；
 边界值拦截器通过ValueAdapter将原值转换为比较值，再使用通用判决器将比较值和界定值进行比较。多种拦截器可搭配使用。
 所有拦截器和使用到的数据在本地均有缓存，请求时无需读库获取。
 
 综上所述，应用、业务、配置项和拦截器之间的关系如下如所示：
- ![](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a2.png)
+ ![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a2.png)
 举例:
 1. 例1 对所有进入991频道的小米渠道用户下发配置。
- ![](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a3.png)
+ ![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a3.png)
 2. 例2 对所有进入尾号为9的频道的勋爵用户下发配置。
-![](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a4.png)
+![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a4.png)
 3. 例3 将配置随机发放给500名进入1931频道的观众。
-![](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a5.png)
+![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a5.png)
 
 ### 2.4	逻辑流程
-![](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a7.png)
+![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a7.png)
 业务可配置全局拦截器，若不符合全局条件则直接返回默认列表。
 
 
