@@ -27,7 +27,7 @@
 
 整个系统分为配置下发进程、管理后台和客户端SDK三部分。
 如下图所示，管理后台进行应用配置、业务配置和配置项配置的管理。配置下发进程负责处理下发逻辑，为符合下发条件的用户下发配置。客户端SDK封装协议，并在客户端本地缓存配置，方便客户端调用。
- ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a0.png)
+ ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a0.png?raw=true)
 说明：
 1. 缓存采用ecache，配置比较少时，建议都配置为在内存中，管理后台更新配置，每个配置下发进程定时更新缓存，达到配置修改的而目的。
 2. 配置中心支持多个应用App，一个App对应多个业务部门bss，一个业务bss支持多个配置项config，
@@ -61,30 +61,31 @@
  ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a2.png?raw=true)
 举例:
 1. 例1 对所有进入991频道的小米渠道用户下发配置。
- ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a3.png?raw=true)
+   ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a3.png?raw=true)
 2. 例2 对所有进入尾号为9的频道的勋爵用户下发配置。
-![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a4.png?raw=true)
+  ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a4.png?raw=true)
 3. 例3 将配置随机发放给500名进入1931频道的观众。
-![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a5.png?raw=true)
+  ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a5.png?raw=true)
 
-### 2.4	逻辑流程
-![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a7.png?raw=true)
-业务可配置全局拦截器，若不符合全局条件则直接返回默认列表。
+  ### 2.4逻辑流程
+  ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a7.png?raw=true)
+  业务可配置全局拦截器，若不符合全局条件则直接返回默认列表。
 
 
-###  2.4 现有集成协议
+###  2.4 已集成协议
 
 参数列表：
-|参数|类型|说明|
-|---|---|---|
-|bssCode|string|业务代号，可在管理后台配置，全局唯一。例如："mob-video"|
-|bssVersion|i64|当前客户端业务版本号，用于增量下发，默认值设置为0|
-|bssMode|string|下发模式(可选),all--全量下发,newest--增量下发|
-|version|string|客户端版本号，格式：x.x.x|
-|client|string|客户端类型：pc, ios, android, ipad, web, etc.|
-|osVersion|string|操作系统版本，例如：android 6.0.1, iOS 10|
-|market|string|渠道号|
-|net|string|网络类型,3G,4G,wifi等|
-|isp|string|网络提供商|
-|model|string|手机型号|
-|extendInfo|Map|扩展字段|
+
+| 参数         | 类型     | 说明                                      |
+| ---------- | ------ | --------------------------------------- |
+| bssCode    | string | 业务代号，可在管理后台配置，全局唯一。例如："mob-video"       |
+| bssVersion | i64    | 当前客户端业务版本号，用于增量下发，默认值设置为0               |
+| bssMode    | string | 下发模式(可选),all--全量下发,newest--增量下发         |
+| version    | string | 客户端版本号，格式：x.x.x                         |
+| client     | string | 客户端类型：pc, ios, android, ipad, web, etc. |
+| osVersion  | string | 操作系统版本，例如：android 6.0.1, iOS 10         |
+| market     | string | 渠道号                                     |
+| net        | string | 网络类型,3G,4G,wifi等                        |
+| isp        | string | 网络提供商                                   |
+| model      | string | 手机型号                                    |
+| extendInfo | Map    | 扩展字段                                    |
