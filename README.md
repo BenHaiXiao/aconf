@@ -52,23 +52,23 @@
 
 原属性和比较属性之间使用ValueAdapter转换。转换器可以以模板的形式提供，用户可在后台配置。
 对应以上两种类型的条件，设计了两种条件拦截器：
- ![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a1.png)
+ ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a1.png?raw=true)
 计数拦截器通过计数器控制条件计数，超过设置值则停止计数，且请求总是不通过；
 边界值拦截器通过ValueAdapter将原值转换为比较值，再使用通用判决器将比较值和界定值进行比较。多种拦截器可搭配使用。
 所有拦截器和使用到的数据在本地均有缓存，请求时无需读库获取。
 
 综上所述，应用、业务、配置项和拦截器之间的关系如下如所示：
- ![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a2.png)
+ ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a2.png?raw=true)
 举例:
 1. 例1 对所有进入991频道的小米渠道用户下发配置。
- ![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a3.png)
+ ![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a3.png?raw=true)
 2. 例2 对所有进入尾号为9的频道的勋爵用户下发配置。
-![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a4.png)
+![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a4.png?raw=true)
 3. 例3 将配置随机发放给500名进入1931频道的观众。
-![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a5.png)
+![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a5.png?raw=true)
 
 ### 2.4	逻辑流程
-![image](https://github.com/BenHaiXiao/aconf/tree/master/doc/pic/a7.png)
+![image](https://github.com/BenHaiXiao/aconf/blob/master/doc/pic/a7.png?raw=true)
 业务可配置全局拦截器，若不符合全局条件则直接返回默认列表。
 
 
